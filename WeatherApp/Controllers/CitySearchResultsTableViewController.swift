@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class CitySearchResultsTableViewController: UITableViewController {
 
@@ -30,7 +31,9 @@ class CitySearchResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell", for: indexPath)
         let city = filteredCities[indexPath.row]
-        cell.textLabel?.text = city.formattedName
+        cell.contentConfiguration = UIHostingConfiguration {
+            Text(city.formattedName)
+        }
         return cell
     }
 
