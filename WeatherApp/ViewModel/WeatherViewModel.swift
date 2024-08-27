@@ -120,9 +120,10 @@ private extension WeatherViewModel {
     
     func fetchOpenWeatherCities(for query: String) {
         openweather.fetchCities(for: query)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 if case .failure(let error) = completion {
                     print("Error fetching cities: \(error.localizedDescription)")
+                    self?.errorMessage = "Failed to fetch Cities"
                 }
             }, receiveValue: { [weak self] cities in
                 self?.citiesSearchResults = cities.map { city in
